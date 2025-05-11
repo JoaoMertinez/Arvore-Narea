@@ -10,15 +10,6 @@ public class nArea_lista implements Definicoes {
 
     public void inserirLista(int valor){
         no_L info = new no_L(valor);
-
-        if(raiz==null){
-            raiz = new no_Lista(info);
-        }
-        else{
-
-        }
-
     }
-
 
 }

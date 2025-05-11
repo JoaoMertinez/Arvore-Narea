@@ -41,6 +41,48 @@ public class nArea implements Definicoes {
         }
     }
 
+    public void excluir(int info) {
+        if (raiz != null) {
+            raiz = remover(raiz, info);
+        }
+    }
+
+    public No remover(No p, int info) {
+        if (p == null)
+            return null;
+
+        int pos = p.buscarPos(info);
+
+        // achou
+        if (pos < p.getTL() && p.getvInfo(pos) == info) {
+
+            // Caso simples: é folha
+            if (p.getvLig(pos) == null && p.getvLig(pos + 1) == null) {
+                p.remanejar(pos);
+                p.setTL(p.getTL() - 1);
+            } else {
+                // Substituir pelo antecessor (maior da subárvore à esquerda)
+                No aux = p.getvLig(pos);
+                while (aux.getvLig(aux.getTL()) != null) {
+                    aux = aux.getvLig(aux.getTL());
+                }
+                int antecessor = aux.getvInfo(aux.getTL() - 1);
+
+                p.setvInfo(pos, antecessor); // substitui o valor original
+                p.setvLig(pos, remover(p.getvLig(pos), antecessor)); // remove o antecessor da subárvore
+            }
+        } else {
+            // Não encontrou, desce recursivamente
+            No filho = p.getvLig(pos);
+            if (filho != null)
+                p.setvLig(pos, remover(filho, info));
+            else
+                System.out.println("Valor não encontrado.");
+        }
+
+        return p;
+    }
+
     public void Inordem(No raiz) {
         if (raiz != null) {
             for (int i = 0; i < raiz.getTL() ; i++) {
