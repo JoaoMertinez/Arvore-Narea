@@ -26,10 +26,11 @@ public class nArea implements Definicoes {
                 pos = p.buscarPos(info);
                 if(p.getTL() < Definicoes.N-1)//quando ir para baixo vai dar certo
                 {
-                    p.remanejar(pos);
+                    p.remanejar(pos);//vai para o ultimo sempre
                     p.setvInfo(pos,info);
                     p.setTL(p.getTL()+1);
                     flag = true;
+                    System.out.printf(info+" inserido com sucesso! \n");
                 }
                 else{
                     ant = p;
@@ -54,7 +55,7 @@ public class nArea implements Definicoes {
         int pos = p.buscarPos(info);
 
         // achou
-        if (pos < p.getTL() && p.getvInfo(pos) == info) {
+        if (pos < p.getTL()-1 && p.getvInfo(pos) == info) {
 
             // Caso simples: é folha
             if (p.getvLig(pos) == null && p.getvLig(pos + 1) == null) {

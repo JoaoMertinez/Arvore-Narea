@@ -8,8 +8,8 @@ public class No implements Definicoes
     private int TL;
 
     public No() {
-        vInfo = new int[Definicoes.N];
-        vLig = new No[Definicoes.N];
+        vInfo = new int[N-1];
+        vLig = new No[N];
         TL = 0;
     }
 
@@ -52,7 +52,8 @@ public class No implements Definicoes
     }
 
     public void remanejar(int pos) {
-        for (int i = TL; i>pos ; i--) {
+        for (int i = TL; i>pos ; i--) //e assim que voce controla se vai ou nao remanejar
+        {
             vInfo[i] = vInfo[i-1];
         }
     }
