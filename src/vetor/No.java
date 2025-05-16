@@ -57,4 +57,10 @@ public class No implements Definicoes
             vInfo[i] = vInfo[i-1];
         }
     }
+
+    public void remanejarExclusao(int pos) {
+        for (int i = pos; i < TL ; i++) {
+            vLig[i] = vLig[i+1];
+        }
+    }
 }

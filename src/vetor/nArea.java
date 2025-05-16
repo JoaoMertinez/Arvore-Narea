@@ -21,8 +21,9 @@ public class nArea implements Definicoes {
             raiz = new No(info);
         }
         else {
-            p = raiz;
-            while (p!=null && !flag) {
+            p = raiz;//p recebe o primeiro
+            while (p!=null && !flag) //esse while vai andando nos nos da arvore
+            {
                 pos = p.buscarPos(info);
                 if(p.getTL() < Definicoes.N-1)//quando ir para baixo vai dar certo
                 {
@@ -39,6 +40,36 @@ public class nArea implements Definicoes {
             }
             if (!flag)
                 ant.setvLig(pos, new No(info));
+        }
+    }
+
+    public void inserirFixar(int info) {
+        int pos = 0;
+        No ant =null;
+
+        if(raiz==null){
+            raiz = new No(info);
+        }
+        else{
+            No p  = raiz;
+            boolean flag = false;
+            while(!flag && p!=null){
+                pos = p.buscarPos(info);
+                if(p.getTL() < N-1)// pois o vetor de registros tem n-1
+                {
+                    p.remanejar(pos);
+                    p.setvInfo(pos,info);
+                    p.setTL(p.getTL()+1);
+                    flag = true;
+                }
+                else{
+                    ant = p;//porque??
+                    p = p.getvLig(pos);
+                }
+            }
+            if (!flag){
+                ant.setvLig(pos, new No(info));
+            }
         }
     }
 
@@ -82,6 +113,30 @@ public class nArea implements Definicoes {
         }
 
         return p;
+    }
+
+    public void excluirFixar(No nodo, int info) {
+        int pos = 0;
+        No ant=null;
+        pos = nodo.buscarPos(info);
+
+        if(pos<nodo.getTL()-1)//achou
+        {
+            if(nodo.getvLig(pos)==null && nodo.getvInfo(pos)==info)//folha
+            {
+                //nodo.remanejar(pos);
+                nodo.remanejarExclusao(pos);
+                nodo.setTL(nodo.getTL()-1);
+            }
+            else//aponta para alguem
+            {
+                //excluirFixar(nodo.getvLig(pos), info);
+                No aux = nodo.getvLig(pos);
+                while(aux.getvLig(aux.getTL()-1)!=null)
+                    aux = aux.getvLig(aux.getTL()-1);
+            }
+            //depois mecher
+        }
     }
 
     public void Inordem(No raiz) {
