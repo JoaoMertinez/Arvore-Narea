@@ -31,7 +31,7 @@ public class nArea implements Definicoes {
                     p.setvInfo(pos,info);
                     p.setTL(p.getTL()+1);
                     flag = true;
-                    System.out.printf(info+" inserido com sucesso! \n");
+                    //System.out.printf(info+" inserido com sucesso! \n");
                 }
                 else{
                     ant = p;
@@ -53,7 +53,8 @@ public class nArea implements Definicoes {
         else{
             No p  = raiz;
             boolean flag = false;
-            while(!flag && p!=null){
+            while(!flag && p!=null)//tem sempre que ter o while porque o p sempre recebe o raiz, ou seja, se tem 1000 arvores para baixo, cada cada inserir vai comecar na raiz
+            {
                 pos = p.buscarPos(info);
                 if(p.getTL() < N-1)// pois o vetor de registros tem n-1
                 {
